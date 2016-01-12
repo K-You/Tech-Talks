@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Neo4j</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+
+		<!--	Davidson Theme -->
+		<link rel="stylesheet" href="css/theme/davidson-light.css" id="theme">
+		<link rel="stylesheet" href="css/device.css">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+			<div class="slides">
+				<section data-state='landing' data-background="img/landing.jpg">
+					<div class="right">
+						<h1 class="rose">Neo4j</h1>
+						<h3 class="davidson blueGreen">Pierre Bausière</h3>
+						<p class="landing blueGreen">Davidson</p>
+						<p class="landing blueGreen">Take off Talks du 12 Janvier 2016</p>
+
+					</div>
+					<aside class="notes">
+						Présentation rapide des speakers
+					</aside>
+				</section>
+
+
+				<!--  Objectifs -->
+				<section>
+					<h2 class="davidson">Objectifs des 5 minutes</h4>
+					<ul>
+						<li>Rapide overview de Neo4j</li>
+						<li>Explorer un usage d'une BDD type graphe</li>
+						<li>Contexte BigData et e-commerce</li>
+					</ul>
+				</section>
+
+				<!--  Présentation Neo4j-->
+				<section>
+					<section data-background="img/neo4j_logo.jpg">
+							<blockquote>Neo4j</blockquote>
+					</section>
+					<section>
+						<h2 class="davidson">Neo4j</h4>
+						<ul>
+							<li>Base de donnée type graphe la plus connue</li>
+							<ul>
+								<li>Solution open-source, développée en Java</li>
+								<li>Existe en deux versions :</li>
+									<ul>
+										<li>Version community : gratuite sous licence GPL</li>
+										<li>Version enterprise : payante sous licence AGPL</li>
+									</ul>
+							</ul>
+							<li>Utilise le Cypher Query Language</li>
+							<ul>
+								<li>Equivalent du SQL pour BDD classique</li>
+							</ul>
+							<li> Des drivers et APIs pour utiliser le moteur existent </li>
+							<ul>
+								<li>C#</li>
+								<li>Java</li>
+								<li>Ruby</li>
+								<li>Python</li>
+								<li>REST</li>
+							</ul>
+							<li> Interface web très visuelle & pratique </li>
+
+						</ul>
+					</section>
+				</section>
+
+
+				<!--  Modèle de données -->
+				<section>
+					<section data-background="img/server.jpg">
+							<blockquote>Exemple de modèle de données</blockquote>
+					</section>
+					<section  data-transition="none">
+						<h2 class="davidson">Modèle de données</h4>
+						<img class="model" src="img/1.png" />
+					</section>
+					<section class="model" data-transition="none">
+						<h2 class="davidson">Modèle de données</h4>
+						<img class="model" src="img/2.png" />
+					</section>
+					<section data-transition="none">
+						<h2 class="davidson">Modèle de données</h4>
+						<img class="model" src="img/3.png" />
+					</section>
+					<section data-transition="none">
+						<h2 class="davidson">Modèle de données</h4>
+						<img class="model" src="img/4.png" />
+					</section>
+					<section data-transition="none">
+						<h2 class="davidson">Modèle de données</h4>
+						<img class="model" src="img/5.png" />
+					</section>
+					<section data-transition="none">
+						<h2 class="davidson">Modèle de données</h4>
+						<img class="model" src="img/6.png" />
+					</section>
+					<section data-transition="none">
+						<h2 class="davidson">Modèle de données</h4>
+						<img class="model" src="img/7.png" />
+					</section>
+				</section>
+
+
+				<!--  Modèle de données -->
+				<section>
+					<section data-background="img/Neo4j_webapp.JPG">
+							<blockquote>WebApp Neo4j</blockquote>
+					</section>
+				</section>
+
+
+				<!--  Application Customer Services-->
+
+				<section>
+					<section data-background="img/boomerang.jpg">
+							<blockquote>Retour d'expérience</blockquote>
+					</section>
+					<section>
+						<h2 class="davidson">Retour d'expérience</h4>
+						<ul>
+							<li>Mode graphe intuitif</li>
+
+							<li>Mode graphe adapté aux parcours clients</li>
+
+						</ul>
+					</section>
+
+
+
+					<section>
+						<h3 class="davidson">Temps passé sur chaque catégorie en SQL</h3>
+							<pre>
+								<code>SELECT categoryMaxElapsecTime.id
+								       , categoryMaxElapsecTime.titleCode
+								       , categoryMaxElapsecTime.customerPartnerId
+								       , (categoryMaxElapsecTime.elapsedTime / 1000 / 60) elapsedTimeInSeconde
+								FROM (
+								       SELECT categoryElapsedTime.id
+								              , categoryElapsedTime.titleCode
+								              , categoryElapsedTime.customerPartnerId
+								              , categoryElapsedTime.elapsedTime
+								              , ROW_NUMBER() OVER (
+								                     PARTITION BY categoryElapsedTime.titleCode , categoryElapsedTime.customerPartnerId, categoryElapsedTime.id ORDER BY categoryElapsedTime.elapsedTime ASC
+								              ) partitionByTitleCodeOrderByElapsedTime
+								       FROM (
+								              SELECT p.id
+								                     , (p.date - vw_user_activity.date) elapsedTime
+								                     , p.titleCode
+								                     , p.customerPartnerId
+								              FROM category p
+								              JOIN  vw_user_activity
+								              ON (p.customerPartnerId = vw_user_activity.customerPartnerId)
+								              AND (p.titleCode = vw_user_activity.titleCode)
+								              WHERE p.dt = #partitionDate#
+								        AND p.date >= #startDate#
+								              AND p.date <= #endDate#
+								              AND p.country = 'France'
+								              AND vw_user_activity.date < p.date
+								       ) categoryElapsedTime
+								) categoryMaxElapsecTime
+								WHERE categoryMaxElapsecTime.partitionByTitleCodeOrderByElapsedTime = 1
+								ORDER BY categoryMaxElapsecTime.customerPartnerId;
+								</code>
+							</pre>
+					</section>
+					<section>
+					<h3 class="davidson">Temps passé sur chaque catégorie en Cyher</h3>
+					<pre>
+						<code>
+							MATCH p=(:Customer {title:"decathlon"})-[*..]->(c:PageCategory)-->()
+							WITH  c, relationships(p) AS relat
+							WITH c, relat[1] AS date1, relat[0] AS date0
+							WITH c, date1.date-date0.date AS date ORDER BY c.title
+							RETURN collect(c), collect(date)
+						</code>
+					</pre>
+					</section>
+					<section>
+						<h3 class="davidson">Exemples de requêtes Cypher</h3>
+						<h4 class="davidson">Dernier parcours d'un utilisateur sur un site :</h4>
+
+						<pre>
+							<code>
+								MATCH p=(u:User{name:"Pierre"})-[r]->(:Customer)
+								WITH r,u,p ORDER BY r.date DESC LIMIT 1
+								MATCH last=(u)-[r2*..]->()
+								WITH FILTER(rel in relationships(last) WHERE rel.date>r.date) AS lastR,p
+								UNWIND lastR AS lastUnwound
+								WITH DISTINCT lastUnwound AS relations,p
+								return collect(relations) AS RELATIONS ,p AS THIRD
+							</code>
+						</pre>
+						<h4 class="davidson">Point d'entrée principal :</h4>
+						<pre>
+							<code>
+								MATCH (:Customer)-[r:BROWSE]->(p)
+								WITH DISTINCT p.title AS titles, count(p.title) AS counts
+								RETURN titles, counts ORDER BY counts DESC LIMIT 5
+							</code>
+						</pre>
+						<h4 class="davidson">Catégorie la plus visité :</h4>
+						<pre>
+							<code>
+								MATCH (c:PageCategory)
+								WITH distinct c.title AS titles, count(c.title) AS counts
+								return titles, counts ORDER BY counts DESC LIMIT 1
+							</code>
+						</pre>
+					</section>
+				</section>
+
+
+				<!--  Modèle de données -->
+				<section>
+					<section data-background="img/demarche.jpg">
+							<blockquote>À retenir :</blockquote>
+					</section>
+					<section>
+						<h2 class="davidson">À retenir :</h4>
+						<ul>
+							<li>Concepts de <i>noeuds</i>, <i>relations</i> et <i>chemins</i></li>
+							<li>Mode graphe se prête bien à <i>certaines</i> problématiques.</li>
+
+						</ul>
+					</section>
+				</section>
+
+				<section data-background="img/contact.png">
+					<p class="contact">
+						<span class="size-medium blueGreen">Pierre Bausière</span><br />
+						<span class="size-medium rose"> Consultant Davidson SI Nord</span> <br/>
+						pierre.bausiere@davidson.fr <br/>
+						06 83 71 44 40 <br/>
+						@PierreBausiere
+						<br/>
+						<br/>
+
+						<span class="size-medium blueGreen">Référence</span><br/>
+						<span class="size-medium rose">Neo4j</span> <br/>
+						http://neo4j.com/
+
+						<br />
+						<br />
+
+					</p>
+				</section>
+			</div>
+		</div>
+
+
+		<img id='minilogo' src='img/theme/logo.png'>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/jquery-2.1.3.min.js"></script>
+		<script src="js/reveal.js"></script>
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				slideNumber: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+		</script>
+
+		<script>
+			Reveal.addEventListener( 'ready', function( event ) {
+				$("#minilogo").show();
+				if(event.indexh === 0){
+					$(".slide-number").hide();
+				}else{
+					$(".slide-number").show();
+				}
+			} );
+			Reveal.addEventListener( 'slidechanged', function( event ) {
+				$("#minilogo").show();
+				if(event.indexh === 0){
+					$(".slide-number").hide();
+				}else{
+					$(".slide-number").show();
+				}
+			} );
+		</script>
+
+	</body>
+</html>
